@@ -45,5 +45,11 @@
 
   <Capabilities>
     <Capability Name="internetClient" />
+    <uap:Capability Name="videosLibrary"/>
+    <uap:Capability Name="voipCall"/>
+    <uap:Capability Name="picturesLibrary"/>
+    <DeviceCapability Name="webcam"/>
+    <DeviceCapability Name="microphone"/>
+    <DeviceCapability Name="gazeInput"/>
   </Capabilities>
 </Package>

@@ -14,13 +14,45 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <Image Grid.Row="0" x:Name="User_Image" 
+               HorizontalAlignment="Stretch"
+                       Height="300"
+                       
+               Margin="30"
+               
+               />
+
+
+
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Grid.Row="1">
+                    Grid.Row="1"
+                    Orientation="Horizontal">
+            <Button x:Name="Capture_Button" Content="Capture" Margin="20" HorizontalAlignment="Stretch" Click="Capture_Button_Click"/>
+
+            <Button x:Name="Detect_Face_Button" Content="Detect Face" Margin="20" HorizontalAlignment="Stretch"/>
+            
+            
+            
+
+
             <TextBox x:Name="LastName_Entry" PlaceholderText="Enter First Name" Margin="20" HorizontalAlignment="Stretch"/>
             <TextBox x:Name="FirstName_Entry" PlaceholderText="Enter Last Name" Margin="20" HorizontalAlignment="Stretch"/>
+            
+            
 
-            <Button Content="Add Person" HorizontalAlignment="Stretch" Background="Transparent" />
+            <Button Content="Add Person" HorizontalAlignment="Stretch" Background="Transparent" Click="Button_Click" />
+
+
+
+            <Button x:Name="Train_Person_Button" Content="Train Images" Margin="20" HorizontalAlignment="Stretch"/>
+
+
+
+            <Button x:Name="Recognize_Person_Button" Content="Recognise person" Margin="20" HorizontalAlignment="Stretch"/>
+
+
+
         </StackPanel>
 
     </Grid>
