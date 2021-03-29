@@ -8,68 +8,54 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <RelativePanel>
-            <Button x:Name="Hamburger_Button" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" Click="Hamburger_Button_Click"/>
-            <TextBlock x:Name="Title_TextBlock"  RelativePanel.AlignRightWithPanel="True" FontWeight="Bold" Margin="00,00,20,00"/>
-
-        </RelativePanel>
-        <SplitView Grid.Row="1" Name="Menu_Split_View" DisplayMode="CompactOverlay" OpenPaneLength="200" CompactPaneLength="34" HorizontalAlignment="Left">
-            <SplitView.Pane>
-                
-                <ListBox SelectionMode="Single" Name="List_of_Menu_Listbox" SelectionChanged="List_of_Menu_Listbox_SelectionChanged">
-                    <ListBoxItem Name="Home_List_Box_Item">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"  Text="&#xE10F;"/>
-                            <TextBlock Text="Home" Margin="20,00,00,00"/>
-                        </StackPanel>
-                    </ListBoxItem>
-                    
-                    
-                    <ListBoxItem Name="People_List_Box_Item">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"  Text="&#xE2AF;"/>
-                            <TextBlock Text="People" Margin="20,00,00,00"/>
-                        </StackPanel>
-                    </ListBoxItem>
+    <Grid >
+        <NavigationView x:Name="NavView" Loaded="NavigationView_Loaded"
+                        
+                        SelectionChanged="NavigationView_SelectionChanged">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Icon="Home" Content="Home" Tag="Home"/>
 
 
-                    <ListBoxItem Name="Take_Attendance_List_Box_Item">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"  Text="&#xE20A;"/>
-                            <TextBlock Text="Take Attendance"  Margin="20,00,00,00"/>
-                        </StackPanel>
-                    </ListBoxItem>
+                <NavigationViewItem Content="People" Tag="People">
+                    <NavigationViewItem.Icon>
 
+                        <BitmapIcon UriSource="Assets/people_32px.png"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
 
-                    <ListBoxItem Name="Attendance_List_Box_Item">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"  Text="&#xE1DC;"/>
-                            <TextBlock Text="Attendance"  Margin="20,00,00,00"/>
-                        </StackPanel>
-                    </ListBoxItem>
+                <NavigationViewItem Content="Attendance" Tag="Attendance">
+                    <NavigationViewItem.Icon>
 
-                    <ListBoxItem Name="Add_People_List_Box_Item">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontFamily="Segoe MDL2 Assets"  Text="&#xE710;"/>
-                            <TextBlock Text="Add People"  Margin="20,00,00,00"/>
-                        </StackPanel>
-                    </ListBoxItem>
+                        <BitmapIcon UriSource="Assets/page_32px.png"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
 
-                </ListBox>
-            </SplitView.Pane>
-            <SplitView.Content>
-               
-                    <Frame x:Name="Content_Frame" Margin="0,0,-489,0"/>
+                <NavigationViewItem Content="Add Person" Tag="Add_Person">
+                    <NavigationViewItem.Icon>
 
+                        <BitmapIcon UriSource="Assets/add_user_male_32px.png"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
 
-            </SplitView.Content>
-            
-        </SplitView>
+                <NavigationViewItem Content="Take Attendance" Tag="Add_Attendance">
+                    <NavigationViewItem.Icon>
+
+                        <BitmapIcon UriSource="Assets/add_list_32px.png"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+
+                <NavigationViewItem Content="Download Attendance" Tag="Download">
+                    <NavigationViewItem.Icon>
+
+                        <BitmapIcon UriSource="Assets/download_32px.png"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+
+            <ScrollViewer>
+                <Frame x:Name="Content_Frame"/>
+            </ScrollViewer>
+        </NavigationView>
 
     </Grid>
 </Page>

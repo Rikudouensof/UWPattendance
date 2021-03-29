@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using UWPattendance.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -18,19 +17,14 @@ using Windows.UI.Xaml.Navigation;
 
 namespace UWPattendance
 {
-
-   
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class People_Page : Page
+    public sealed partial class Download : Page
     {
-        List<Attendance> Attendances;
-        public People_Page()
+        public Download()
         {
             this.InitializeComponent();
-            Attendances = AttendanceList.GetAttendance();
-            Attendance_ListView.ItemsSource = Attendances;
         }
     }
 }

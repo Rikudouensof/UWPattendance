@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Azure.CognitiveServices.Vision.Face;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,11 +27,14 @@ namespace UWPattendance
     {
         public Home_Page()
         {
+            
             this.InitializeComponent();
 
 
            
         }
+
+       
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {

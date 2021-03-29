@@ -25,44 +25,58 @@ namespace UWPattendance
         public MainPage()
         {
             this.InitializeComponent();
-            Content_Frame.Navigate(typeof(Home_Page));
-            Title_TextBlock.Text = "Home";
-        }
-
-        private void Hamburger_Button_Click(object sender, RoutedEventArgs e)
-        {
-            Menu_Split_View.IsPaneOpen = !Menu_Split_View.IsPaneOpen;
-        }
-
-        private void List_of_Menu_Listbox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (Home_List_Box_Item.IsSelected)
-            {
-                Content_Frame.Navigate(typeof(Home_Page));
-                Title_TextBlock.Text = "Home";
-            }
-            else if (People_List_Box_Item.IsSelected)
-            {
-                Content_Frame.Navigate(typeof(People_Page));
-                Title_TextBlock.Text = "People";
-            }
-            else if (Add_People_List_Box_Item.IsSelected)
-            {
-                Content_Frame.Navigate(typeof(Add_People_Page));
-                Title_TextBlock.Text = "Add People";
-            }
-            else if (Attendance_List_Box_Item.IsSelected)
-            {
-                Content_Frame.Navigate(typeof(Attendance_Page));
-                Title_TextBlock.Text = "Attendance";
-            }
-            else if (Take_Attendance_List_Box_Item.IsSelected)
-            {
-                Content_Frame.Navigate(typeof(Take_Attendance_Page));
-                Title_TextBlock.Text = "Take Attendance";
-            }
         }
 
       
+
+      
+
+        private void NavigationView_Loaded(object sender, RoutedEventArgs e)
+        {
+            Content_Frame.Navigate(typeof(Home_Page));
+        }
+
+        private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            if (args.IsSettingsSelected)
+            {
+
+            }
+            else
+            {
+                NavigationViewItem item = args.SelectedItem as NavigationViewItem;
+
+                switch(item.Tag.ToString())
+                {
+                    case "Home":
+                        Content_Frame.Navigate(typeof(Home_Page));
+                        break;
+
+
+                    case "People":
+                        Content_Frame.Navigate(typeof(People_Page));
+                        break;
+
+                    case "Attendance":
+                        Content_Frame.Navigate(typeof(Attendance_Page));
+                        break;
+
+                    case "Add_Person":
+                        Content_Frame.Navigate(typeof(Add_People_Page));
+                        break;
+
+                    case "Download":
+                        Content_Frame.Navigate(typeof(Download));
+                        break;
+
+                    case "Add_Attendance":
+                        Content_Frame.Navigate(typeof(Take_Attendance_Page));
+                        break;
+                }
+            }
+
+
+           
+        }
     }
 }

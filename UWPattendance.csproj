@@ -125,6 +125,10 @@
     <Compile Include="Attendance_Page.xaml.cs">
       <DependentUpon>Attendance_Page.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Download.xaml.cs">
+      <DependentUpon>Download.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FaceRecognitonBinary.cs" />
     <Compile Include="Home_Page.xaml.cs">
       <DependentUpon>Home_Page.xaml</DependentUpon>
     </Compile>
@@ -153,9 +157,15 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\add_list_32px.png" />
+    <Content Include="Assets\add_user_male_32px.png" />
+    <Content Include="Assets\download_32px.png" />
+    <Content Include="Assets\generic-profile.jpg" />
     <Content Include="Assets\haarcascade_frontalface_alt.xml" />
     <Content Include="Assets\haarcascade_frontalface_default.xml" />
     <Content Include="Assets\lbpcascade_frontalface.xml" />
+    <Content Include="Assets\page_32px.png" />
+    <Content Include="Assets\people_32px.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -178,6 +188,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Download.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Home_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -196,8 +210,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.Face">
+      <Version>2.6.0-preview.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.12</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
     </PackageReference>
     <PackageReference Include="OpenCvSharp4">
       <Version>4.5.1.20210210</Version>

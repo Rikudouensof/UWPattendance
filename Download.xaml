@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="UWPattendance.Take_Attendance_Page"
+    x:Class="UWPattendance.Download"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:UWPattendance"
@@ -7,20 +7,20 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Grid>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <Image x:Name="Image_Name"/>
-        </StackPanel>
+        <StackPanel HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
 
-        <Button Grid.Row="1" HorizontalAlignment="Center"
-                Content="Register"/>
+            <TextBlock Text="Your files will be exported to you in CSV (excel) file format"/>
+
+            <Button Content="Download File" HorizontalAlignment="Center" Margin="00,20,00,00"/>
+        </StackPanel>
+        
+
+
 
 
     </Grid>
+
 </Page>

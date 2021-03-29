@@ -9,12 +9,13 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <Image Grid.Row="0" x:Name="User_Image" 
+
+        <Image Grid.Column="1" x:Name="User_Image" 
                HorizontalAlignment="Stretch"
                        Height="300"
                        
@@ -23,37 +24,41 @@
                />
 
 
-
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Grid.Row="1"
-                    Orientation="Horizontal">
-            <Button x:Name="Capture_Button" Content="Capture" Margin="20" HorizontalAlignment="Stretch" Click="Capture_Button_Click"/>
+                    Grid.Column="0"
+                    Margin="20,00"
+                   >
+            <Button x:Name="Capture_Person_Button" Content="Capture" Margin="00,5"  HorizontalAlignment="Stretch" Click="Capture_Person_Button_Click"/>
 
-            <Button x:Name="Detect_Face_Button" Content="Detect Face" Margin="20" HorizontalAlignment="Stretch"/>
-            
-            
-            
-
-
-            <TextBox x:Name="LastName_Entry" PlaceholderText="Enter First Name" Margin="20" HorizontalAlignment="Stretch"/>
-            <TextBox x:Name="FirstName_Entry" PlaceholderText="Enter Last Name" Margin="20" HorizontalAlignment="Stretch"/>
-            
-            
-
-            <Button Content="Add Person" HorizontalAlignment="Stretch" Background="Transparent" Click="Button_Click" />
+            <Button x:Name="Detect_Face_Button" Content="Detect Face" Margin="00,5"  HorizontalAlignment="Stretch"/>
 
 
 
-            <Button x:Name="Train_Person_Button" Content="Train Images" Margin="20" HorizontalAlignment="Stretch"/>
+
+
+            <TextBox x:Name="LastName_Entry" PlaceholderText="Enter First Name" Margin="00,5"  HorizontalAlignment="Stretch"/>
+            <TextBox x:Name="FirstName_Entry" PlaceholderText="Enter Last Name" Margin="00,5"  HorizontalAlignment="Stretch"/>
 
 
 
-            <Button x:Name="Recognize_Person_Button" Content="Recognise person" Margin="20" HorizontalAlignment="Stretch"/>
+            <Button Content="Add Person" HorizontalAlignment="Stretch" Margin="00,5"  Background="Transparent" />
+
+
+
+            <Button x:Name="Train_Person_Button" Content="Train Images" Margin="00,5"  HorizontalAlignment="Stretch"/>
+
+
+
+            <Button x:Name="Recognize_Person_Button" Content="Recognise person" Margin="00,5"   HorizontalAlignment="Stretch"/>
+
+            <TextBlock x:Name="Error_Label" Text="Fine" Foreground="Red" />
 
 
 
         </StackPanel>
+
+       
 
     </Grid>
 </Page>

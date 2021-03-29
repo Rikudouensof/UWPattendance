@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.Media.Capture;
 using Windows.Storage.Pickers;
 using Windows.Storage;
@@ -20,6 +20,11 @@ using UWPattendance.Tasks;
 using Windows.UI.Xaml.Media.Imaging;
 using OpenCvSharp;
 using System.Threading.Tasks;
+
+using Windows.Storage.Streams;
+using Windows.Graphics.Imaging;
+using Windows.Media.Capture;
+using Windows.Storage;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -43,55 +48,41 @@ namespace UWPattendance
             _haarCascade = CascadeClassifiers.InitializeFaceClassifier();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private async void Capture_Button_Click(object sender, RoutedEventArgs e)
-        {
-            FileOpenPicker openPicker = new FileOpenPicker
-            {
-                ViewMode = PickerViewMode.Thumbnail,
-                SuggestedStartLocation = PickerLocationId.PicturesLibrary
-            };
-
-            openPicker.FileTypeFilter.Add(".jpg");
-            openPicker.FileTypeFilter.Add(".jpeg");
-            openPicker.FileTypeFilter.Add(".png");
-
-
-            StorageFile file = await openPicker.PickSingleFileAsync();
-            if (file == null)
-            {
-                return;
-            }
-
-            var mat = await file.ToMatAsync();
-            if (mat == null)
-            {
-                return;
-            }
-
-
-
-            var faces = DetectFaces.DetectFace(_haarCascade, mat);
-            if (faces.Any() == false)
-            {
-                User_Image.Source = null;
-                return;
-
-            }
-
-
-            using (var rendered_faces = RenderFaces.RenderFace(faces, mat))
-            {
-                User_Image.Source = null;
-                User_Image.Source = await rendered_faces.ToBitmapImageAsync();
-            }
-
-        }
+       
 
        
+        private async void Capture_Person_Button_Click(object sender, RoutedEventArgs e)
+        {
+            CameraCaptureUI captureUI = new CameraCaptureUI();
+            captureUI.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Jpeg;
+            captureUI.PhotoSettings.CroppedSizeInPixels = new Windows.Foundation.Size(200, 200);
+
+            StorageFile photo = await captureUI.CaptureFileAsync(CameraCaptureUIMode.Photo);
+
+            if (photo == null)
+            {
+                // User cancelled photo capture
+                return;
+            }
+            IRandomAccessStream stream = await photo.OpenAsync(FileAccessMode.Read);
+            BitmapDecoder decoder = await BitmapDecoder.CreateAsync(stream);
+            SoftwareBitmap softwareBitmap = await decoder.GetSoftwareBitmapAsync();
+            StorageFolder destinationFolder =
+             await ApplicationData.Current.LocalFolder.CreateFolderAsync("ProfilePhotoFolder",
+                CreationCollisionOption.OpenIfExists);
+            SoftwareBitmap softwareBitmapBGR8 = SoftwareBitmap.Convert(softwareBitmap,
+        BitmapPixelFormat.Bgra8,
+        BitmapAlphaMode.Premultiplied);
+
+            SoftwareBitmapSource bitmapSource = new SoftwareBitmapSource();
+            await bitmapSource.SetBitmapAsync(softwareBitmapBGR8);
+
+            User_Image.Source = bitmapSource;
+            await photo.CopyAsync(destinationFolder, "ProfilePhoto.jpg", NameCollisionOption.ReplaceExisting);
+
+
+            var imagepath = photo.CopyAsync(destinationFolder, "ProfilePhoto.jpg", NameCollisionOption.ReplaceExisting);
+            await photo.DeleteAsync();
+        }
     }
 }

@@ -26,6 +26,8 @@ namespace UWPattendance.Models
         public string LastName { get; set; }
 
 
+        public string NewPicturePath { get; set; }
+
 
         public DateTime Date_Signed_In_Date_and_Time { get; set; }
 
