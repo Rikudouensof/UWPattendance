@@ -11,15 +11,29 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0">
-            <Image x:Name="Image_Name"/>
+        <StackPanel Grid.Row="0" Margin="00,20,00,00">
+            <Image  x:Name="User_Image"  HorizontalAlignment="Stretch"   Height="300"
+                       
+               Margin="20,00"/>
         </StackPanel>
 
-        <Button Grid.Row="1" HorizontalAlignment="Center"
-                Content="Register"/>
+        <Button Grid.Row="1" HorizontalAlignment="Stretch"
+                Content="Take Attendance"
+                Margin="20,00"
+                x:Name="Capture_Person_Button"
+                VerticalAlignment="Bottom"
+                Click="Capture_Person_Button_Click"/>
+
+
+        
+
+        <TextBox x:Name="Books_Label" IsEnabled="False" Grid.Row="2" Text="See here for updates" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                 Margin="20,30" Background="White"
+                 Foreground="DarkGreen"/>
 
 
     </Grid>

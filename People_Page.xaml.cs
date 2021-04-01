@@ -1,9 +1,11 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UWPattendance.Models;
+using UWPattendance.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,12 +27,48 @@ namespace UWPattendance
     /// </summary>
     public sealed partial class People_Page : Page
     {
-        List<Attendance> Attendances;
+        string _dbPath = Database_Connection._dbpath;
+        List<Person> Attendances;
         public People_Page()
         {
             this.InitializeComponent();
-            Attendances = AttendanceList.GetAttendance();
+            var db = new SQLiteConnection(_dbPath);
+            Attendances = db.Table<Person>().OrderBy(m => m.Id).ToList();
+
+           
+
+            foreach (var item in Attendances)
+            {
+                string a = item.ImagePath;
+                string b = a.Replace(@"\\", "/");
+                string c = a.Replace("\\", "/");
+
+                Console.WriteLine(b);
+                Console.WriteLine(a);
+                item.ImagePath = c;
+            }
+
+            var count = Attendances.FirstOrDefault();
+
             Attendance_ListView.ItemsSource = Attendances;
+        }
+
+       
+
+        private void Edit_Person_Button_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void Delete_Person_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Attendance_ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = Attendance_ListView.SelectedItem as Person;
+            this.Frame.Navigate(typeof(PersonDetail), item.Id);
         }
     }
 }

@@ -29,30 +29,30 @@
                     Grid.Column="0"
                     Margin="20,00"
                    >
-            <Button x:Name="Capture_Person_Button" Content="Capture" Margin="00,5"  HorizontalAlignment="Stretch" Click="Capture_Person_Button_Click"/>
-
-            <Button x:Name="Detect_Face_Button" Content="Detect Face" Margin="00,5"  HorizontalAlignment="Stretch"/>
-
-
-
 
 
             <TextBox x:Name="LastName_Entry" PlaceholderText="Enter First Name" Margin="00,5"  HorizontalAlignment="Stretch"/>
-            <TextBox x:Name="FirstName_Entry" PlaceholderText="Enter Last Name" Margin="00,5"  HorizontalAlignment="Stretch"/>
+            <TextBox x:Name="FirstName_Entry" PlaceholderText="Enter Last Name" Margin="00,5"  HorizontalAlignment="Stretch" TextChanged="FirstName_Entry_TextChanged"/>
+
+
+            <Button x:Name="Capture_Person_Button" Content="Capture" Margin="00,5"  HorizontalAlignment="Stretch" Click="Capture_Person_Button_Click" Visibility="Collapsed"/>
 
 
 
-            <Button Content="Add Person" HorizontalAlignment="Stretch" Margin="00,5"  Background="Transparent" />
 
 
 
-            <Button x:Name="Train_Person_Button" Content="Train Images" Margin="00,5"  HorizontalAlignment="Stretch"/>
+          
+
+            <Button Visibility="Collapsed"  Content="Add Person" HorizontalAlignment="Stretch" Margin="00,5"  Background="Transparent" x:Name="Add_Person_Button" Click="Add_Person_Button_Click"/>
 
 
 
-            <Button x:Name="Recognize_Person_Button" Content="Recognise person" Margin="00,5"   HorizontalAlignment="Stretch"/>
 
-            <TextBlock x:Name="Error_Label" Text="Fine" Foreground="Red" />
+
+
+
+            <TextBlock Visibility="Collapsed" x:Name="Error_Label" Text="Fine" Foreground="Red" />
 
 
 

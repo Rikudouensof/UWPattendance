@@ -24,6 +24,7 @@
                        Margin="20,00,00,00"
                        />
             <TextBlock Text="20"
+                       x:Name="Numbers_TextBlock"
                        FontSize="70"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"

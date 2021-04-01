@@ -1,9 +1,12 @@
 ﻿using Microsoft.Azure.CognitiveServices.Vision.Face;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UWPattendance.Models;
+using UWPattendance.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Media.Capture;
@@ -25,13 +28,16 @@ namespace UWPattendance
     /// </summary>
     public sealed partial class Home_Page : Page
     {
+        string _dbPath = Database_Connection._dbpath;
         public Home_Page()
         {
             
             this.InitializeComponent();
+            var db = new SQLiteConnection(_dbPath);
 
+            var numbers = db.Table<Person>().Count();
+            Numbers_TextBlock.Text = numbers.ToString();
 
-           
         }
 
        

@@ -136,9 +136,14 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Attendance.cs" />
+    <Compile Include="Tasks\AuthenticateFaceRecognitionClient.cs" />
+    <Compile Include="Tasks\FaceRecognitionFunctions.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="People_Page.xaml.cs">
       <DependentUpon>People_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PersonDetail.xaml.cs">
+      <DependentUpon>PersonDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Take_Attendance_Page.xaml.cs">
@@ -146,10 +151,7 @@
     </Compile>
     <Compile Include="Tasks\CascadeClassifiers.cs" />
     <Compile Include="Tasks\Database_Connection.cs" />
-    <Compile Include="Tasks\DetectFaces.cs" />
-    <Compile Include="Tasks\MatPictures.cs" />
-    <Compile Include="Tasks\RenderFaces.cs" />
-    <Compile Include="Tasks\ToBitmap.cs" />
+    <Compile Include="Tasks\GetFaceRecognitionKeys.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -204,6 +206,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PersonDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Take_Attendance_Page.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -218,12 +224,6 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="OpenCvSharp4">
-      <Version>4.5.1.20210210</Version>
-    </PackageReference>
-    <PackageReference Include="OpenCvSharp4.runtime.uwp">
-      <Version>4.5.1.20210210</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.7.335</Version>

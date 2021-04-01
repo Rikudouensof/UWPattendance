@@ -23,6 +23,8 @@ namespace UWPattendance.Models
 
         public string ImagePath { get; set; }
 
+        public DateTime DateRegistered { get; set; }
+
 
     }
 }
