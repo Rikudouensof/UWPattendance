@@ -89,7 +89,7 @@ namespace UWPattendance
 
             string name = LastName_Entry.Text + " "+ FirstName_Entry.Text + ".jpg";
 
-            await photo.CopyAsync(destinationFolder, "Walder.jpg", NameCollisionOption.FailIfExists);
+            await photo.CopyAsync(destinationFolder, name, NameCollisionOption.FailIfExists);
             string a = photo.Path;
             imagepath = a.Replace("\\", "/");
 

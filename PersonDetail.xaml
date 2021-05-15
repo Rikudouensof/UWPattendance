@@ -8,6 +8,8 @@
     mc:Ignorable="d"
     xmlns:data="using:UWPattendance.Models"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+  
+  
 
     <Grid>
 
@@ -22,9 +24,13 @@
         <StackPanel VerticalAlignment="Top"
                     HorizontalAlignment="Center"
                     Margin="00,20,00,00"
+                    
                     >
+      <Button Content="Delete" HorizontalAlignment="Stretch" x:Name="DeleteButton"
+              Click="DeleteButton_Click"/>
 
-            <StackPanel Orientation="Horizontal" Margin="00,10">
+
+      <StackPanel Orientation="Horizontal" Margin="00,10">
                 <TextBlock Text="Last Name: " Margin="20,00"/>
                 <TextBlock Text="Last Name" x:Name="Last_Name_TextBlock"/>
             </StackPanel>
@@ -50,13 +56,14 @@
 
 
 
-
+            
 
 
         </StackPanel>
 
 
-        <Image Source="Assets/generic-profile.jpg" Grid.Row="2" MaxHeight="300"/>
+        <Image Source="Assets/generic-profile.jpg" Grid.Row="2" MaxHeight="300" 
+               x:Name="UserImage"/>
 
         <ListView x:Name="Attendance_ListView" Grid.Row="1">
             <ListView.ItemTemplate>

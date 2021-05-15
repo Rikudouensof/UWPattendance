@@ -14,7 +14,7 @@
 
             <TextBlock Text="Your files will be exported to you in CSV (excel) file format"/>
 
-            <Button Content="Download File" HorizontalAlignment="Center" Margin="00,20,00,00"/>
+            <Button Content="Download File" Click="Button_Click" HorizontalAlignment="Center" Margin="00,20,00,00"/>
         </StackPanel>
         
 

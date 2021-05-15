@@ -1,8 +1,11 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using UWPattendance.Models;
+using UWPattendance.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -17,14 +20,21 @@ using Windows.UI.Xaml.Navigation;
 
 namespace UWPattendance
 {
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        public MainPage()
+      string _dbPath = Database_Connection._dbpath;
+      List<Person> Attendances;
+    public MainPage()
         {
-            this.InitializeComponent();
+
+     
+      this.InitializeComponent();
+
+           
         }
 
       
@@ -38,7 +48,8 @@ namespace UWPattendance
 
         private void NavigationView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
-            if (args.IsSettingsSelected)
+      var db = new SQLiteConnection(_dbPath);
+      if (args.IsSettingsSelected)
             {
 
             }
@@ -54,8 +65,19 @@ namespace UWPattendance
 
 
                     case "People":
-                        Content_Frame.Navigate(typeof(People_Page));
-                        break;
+                      try
+                      {
+                        Attendances = db.Table<Person>().OrderBy(m => m.Id).ToList();
+                          Content_Frame.Navigate(typeof(People_Page));
+                          break;
+                      }
+                      catch
+                      {
+              break;
+
+                      }
+           
+                    
 
                     case "Attendance":
                         Content_Frame.Navigate(typeof(Attendance_Page));

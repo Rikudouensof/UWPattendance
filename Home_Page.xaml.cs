@@ -35,8 +35,22 @@ namespace UWPattendance
             this.InitializeComponent();
             var db = new SQLiteConnection(_dbPath);
 
-            var numbers = db.Table<Person>().Count();
-            Numbers_TextBlock.Text = numbers.ToString();
+
+      try
+      {
+        var numbers = db.Table<Person>().Count();
+
+
+        Numbers_TextBlock.Text = numbers.ToString();
+      }
+      catch
+      {
+
+
+
+        Numbers_TextBlock.Text = 0.ToString();
+      }
+           
 
         }
 

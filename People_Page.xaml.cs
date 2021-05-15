@@ -33,6 +33,7 @@ namespace UWPattendance
         {
             this.InitializeComponent();
             var db = new SQLiteConnection(_dbPath);
+
             Attendances = db.Table<Person>().OrderBy(m => m.Id).ToList();
 
            

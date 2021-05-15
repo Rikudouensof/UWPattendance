@@ -42,8 +42,7 @@
                                     Margin="20,00,00,00"
                                     HorizontalAlignment="Right"
                                     >
-                            <Button x:Name="Edit_Person_Button" Content="Edit" Margin="00,05" Click="Edit_Person_Button_Click"/>
-                            <Button x:Name="Delete_Person_Button" Content="Delete" Margin="00,05" Click="Delete_Person_Button_Click"/>
+                            
                         </StackPanel>
 
                         

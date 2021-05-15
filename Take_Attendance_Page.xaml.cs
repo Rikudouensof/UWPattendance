@@ -128,7 +128,7 @@ namespace UWPattendance
             foreach (var detectedFace in detectedFaces) { sourceFaceIds.Add(detectedFace.FaceId.Value); }
 
             // Identify the faces in a person group. 
-            var identifyResults = await client.Face.IdentifyAsync(sourceFaceIds, personGroupId);
+            var identifyResults = await client.Face.IdentifyAsync((IList<Guid>)sourceFaceIds, personGroupId);
 
             foreach (var identifyResult in identifyResults)
             {

@@ -26,6 +26,7 @@ namespace UWPattendance
     public sealed partial class PersonDetail : Page
     {
         string _dbPath = Database_Connection._dbpath;
+    int userId = 0;
         public PersonDetail()
         {
             this.InitializeComponent();
@@ -37,6 +38,7 @@ namespace UWPattendance
             base.OnNavigatedTo(e);
 
             var user_Id = (int)e.Parameter;
+             userId = user_Id;
             var db = new SQLiteConnection(_dbPath);
             var selected_person = db.Table<Person>().Where(m => m.Id == user_Id).FirstOrDefault();
             var user_attendance = db.Table<Attendance>().Where(m => m.User_ID == user_Id).OrderByDescending(m => m.Date_Signed_In_Date_and_Time);
@@ -44,10 +46,18 @@ namespace UWPattendance
             Last_Name_TextBlock.Text = selected_person.LastName;
             FirstName_Name_TextBlock.Text = selected_person.FirstName;
             Registration_Date_TextBlock.Text = selected_person.DateRegistered.ToString("ddd dd MMM yyyy  HH:mm");
-
+            
             // parameters.Name
             // parameters.Text
             // ...
         }
+
+    private void DeleteButton_Click(object sender, RoutedEventArgs e)
+    {
+      var db = new SQLiteConnection(_dbPath);
+      var selected_person = db.Table<Person>().Where(m => m.Id == userId).FirstOrDefault();
+      db.Delete(selected_person);
+      this.Frame.Navigate(typeof(People_Page));
     }
+  }
 }
