@@ -36,6 +36,12 @@ namespace UWPattendance.Models
 
     public class AttendanceList
     {
+
+    public DateTime yesterday =   new DateTime(2021,05,14);
+
+    DateTime tomorrow = DateTime.UtcNow.AddDays(1);
+
+
         public static List<Attendance> GetAttendance()
             {
 
@@ -46,8 +52,15 @@ namespace UWPattendance.Models
             attendance.Add(new Attendance { Id = 1, FirstName = "Iweh", LastName = "John", Date_Signed_In_Date_and_Time = DateTime.UtcNow });
 
 
+      attendance.Add(new Attendance { Id = 1, FirstName = "Ains Soph", LastName = "Rikudou", Date_Signed_In_Date_and_Time = new DateTime(2021, 05, 14) });
+   
 
-            return attendance;
+      attendance.Add(new Attendance { Id = 1, FirstName = "Klaus", LastName = "Nick", Date_Signed_In_Date_and_Time = DateTime.UtcNow.AddDays(1) });
+      attendance.Add(new Attendance { Id = 1, FirstName = "Iweh", LastName = "John", Date_Signed_In_Date_and_Time = DateTime.UtcNow.AddDays(1) });
+
+
+
+      return attendance;
 
         }
     }

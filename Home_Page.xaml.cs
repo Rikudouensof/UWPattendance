@@ -1,5 +1,4 @@
-﻿using Microsoft.Azure.CognitiveServices.Vision.Face;
-using SQLite;
+﻿using SQLite;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -34,7 +33,7 @@ namespace UWPattendance
             
             this.InitializeComponent();
             var db = new SQLiteConnection(_dbPath);
-
+      DateTextblock.Text = DateTime.UtcNow.ToString("dd/MMM/yyyy");
 
       try
       {

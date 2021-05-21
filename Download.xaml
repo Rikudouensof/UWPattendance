@@ -8,13 +8,14 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
-
-        <StackPanel HorizontalAlignment="Center" 
+    <Image Source="Assets/Background.jpg" Stretch="Fill" Grid.RowSpan="3" Grid.Row="0"/>
+    <StackPanel HorizontalAlignment="Center" 
                     VerticalAlignment="Center">
 
-            <TextBlock Text="Your files will be exported to you in CSV (excel) file format"/>
+            <TextBlock Text="Your files will be exported to you in CSV (excel) file format" Foreground="Beige"/>
 
-            <Button Content="Download File" Click="Button_Click" HorizontalAlignment="Center" Margin="00,20,00,00"/>
+            <Button Content="Download File" Foreground="Beige" Background="Green"
+                    Click="Button_Click" HorizontalAlignment="Center" Margin="00,20,00,00"/>
         </StackPanel>
         
 

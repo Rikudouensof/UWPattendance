@@ -8,30 +8,52 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid >
 
-        <Grid.RowDefinitions>
+  
+    <Grid.RowDefinitions>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Margin="00,20,00,00">
+    <Image Source="Assets/Background.jpg" Stretch="Fill" Grid.RowSpan="3"/>
+
+    <StackPanel Grid.Row="0" Margin="00,20,00,00" Background="White">
             <Image  x:Name="User_Image"  HorizontalAlignment="Stretch"   Height="300"
                        
                Margin="20,00"/>
         </StackPanel>
 
-        <Button Grid.Row="1" HorizontalAlignment="Stretch"
-                Content="Take Attendance"
+    <StackPanel Grid.Row="1" >
+
+      <Button  HorizontalAlignment="Stretch"
+                Content="Capture person"
                 Margin="20,00"
                 x:Name="Capture_Person_Button"
                 VerticalAlignment="Bottom"
-                Click="Capture_Person_Button_Click"/>
+                Click="Capture_Person_Button_Click"
+               Background="Green"
+               Foreground="Beige"
+               />
+
+
+      <Button  HorizontalAlignment="Stretch"
+                Content="Detect Person"
+                Margin="20,00"
+                x:Name="Detect_Person_Button"
+                VerticalAlignment="Bottom"
+               Visibility="Collapsed"  Background="Green"
+               Foreground="Beige"/>
+
+    </StackPanel>
+
+       
 
 
         
 
-        <TextBox x:Name="Books_Label" IsEnabled="False" Grid.Row="2" Text="See here for updates" ScrollViewer.VerticalScrollBarVisibility="Visible"
+        <TextBox x:Name="Books_Label" IsEnabled="False" Grid.Row="2" 
+                 Text="See here for updates" ScrollViewer.VerticalScrollBarVisibility="Visible"
                  Margin="20,30" Background="White"
                  Foreground="DarkGreen"/>
 

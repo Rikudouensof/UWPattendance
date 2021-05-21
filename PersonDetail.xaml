@@ -19,9 +19,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-       
+    <Image Source="Assets/Background.jpg" Stretch="Fill" Grid.RowSpan="3" Grid.Row="0"/>
 
-        <StackPanel VerticalAlignment="Top"
+
+    <StackPanel VerticalAlignment="Top"
                     HorizontalAlignment="Center"
                     Margin="00,20,00,00"
                     
@@ -62,10 +63,12 @@
         </StackPanel>
 
 
-        <Image Source="Assets/generic-profile.jpg" Grid.Row="2" MaxHeight="300" 
-               x:Name="UserImage"/>
+    <Image Grid.Row="2" MaxHeight="300" 
+               x:Name="UserImage">
+     
+    </Image>
 
-        <ListView x:Name="Attendance_ListView" Grid.Row="1">
+    <ListView x:Name="Attendance_ListView" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:Attendance">
                     <Grid HorizontalAlignment="Stretch" >

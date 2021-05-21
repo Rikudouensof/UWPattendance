@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -30,7 +31,7 @@ namespace UWPattendance
         public PersonDetail()
         {
             this.InitializeComponent();
-           
+      
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -42,15 +43,19 @@ namespace UWPattendance
             var db = new SQLiteConnection(_dbPath);
             var selected_person = db.Table<Person>().Where(m => m.Id == user_Id).FirstOrDefault();
             var user_attendance = db.Table<Attendance>().Where(m => m.User_ID == user_Id).OrderByDescending(m => m.Date_Signed_In_Date_and_Time);
+      BitmapImage imagesource = new BitmapImage(new Uri(selected_person.ImagePath));
+      UserImage.Source = imagesource;
+
 
             Last_Name_TextBlock.Text = selected_person.LastName;
             FirstName_Name_TextBlock.Text = selected_person.FirstName;
             Registration_Date_TextBlock.Text = selected_person.DateRegistered.ToString("ddd dd MMM yyyy  HH:mm");
-            
+      
+
             // parameters.Name
             // parameters.Text
             // ...
-        }
+    }
 
     private void DeleteButton_Click(object sender, RoutedEventArgs e)
     {

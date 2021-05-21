@@ -1,9 +1,11 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UWPattendance.Models;
+using UWPattendance.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -23,12 +25,17 @@ namespace UWPattendance
     /// </summary>
     public sealed partial class Attendance_Page : Page
     {
-        List<Attendance> Attendances;
+    string _dbPath = Database_Connection._dbpath;
+    List<Attendance> Attendances;
 
         public Attendance_Page()
         {
             this.InitializeComponent();
-            Attendances = AttendanceList.GetAttendance();
+              var db = new SQLiteConnection(_dbPath);
+
+       Attendances = db.Table<Attendance>().OrderBy(m => m.Id).ToList();
+      //Attendances = AttendanceList.GetAttendance();
+
             Attendance_ListView.ItemsSource = Attendances;
         }
 

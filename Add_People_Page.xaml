@@ -10,12 +10,13 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+    <Image Source="Assets/Background.jpg" Stretch="Fill" Grid.ColumnSpan="2" Grid.Row="0"/>
 
-        <Image Grid.Column="1" x:Name="User_Image" 
+    <Image Grid.Column="1" x:Name="User_Image" 
                HorizontalAlignment="Stretch"
                        Height="300"
                        
@@ -35,7 +36,12 @@
             <TextBox x:Name="FirstName_Entry" PlaceholderText="Enter Last Name" Margin="00,5"  HorizontalAlignment="Stretch" TextChanged="FirstName_Entry_TextChanged"/>
 
 
-            <Button x:Name="Capture_Person_Button" Content="Capture" Margin="00,5"  HorizontalAlignment="Stretch" Click="Capture_Person_Button_Click" Visibility="Collapsed"/>
+            <Button x:Name="Capture_Person_Button" Content="Capture" Margin="00,5"
+                    Background="Green"
+                    Foreground="Beige"
+                    
+                    HorizontalAlignment="Stretch"
+                    Click="Capture_Person_Button_Click" Visibility="Collapsed"/>
 
 
 
@@ -44,7 +50,10 @@
 
           
 
-            <Button Visibility="Collapsed"  Content="Add Person" HorizontalAlignment="Stretch" Margin="00,5"  Background="Transparent" x:Name="Add_Person_Button" Click="Add_Person_Button_Click"/>
+            <Button Visibility="Collapsed"  Content="Add Person" HorizontalAlignment="Stretch" Margin="00,5"
+                       Background="Green"
+                    Foreground="Beige"
+                     x:Name="Add_Person_Button" Click="Add_Person_Button_Click"/>
 
 
 

@@ -128,7 +128,6 @@
     <Compile Include="Download.xaml.cs">
       <DependentUpon>Download.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FaceRecognitonBinary.cs" />
     <Compile Include="Home_Page.xaml.cs">
       <DependentUpon>Home_Page.xaml</DependentUpon>
     </Compile>
@@ -136,8 +135,6 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Attendance.cs" />
-    <Compile Include="Tasks\AuthenticateFaceRecognitionClient.cs" />
-    <Compile Include="Tasks\FaceRecognitionFunctions.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="People_Page.xaml.cs">
       <DependentUpon>People_Page.xaml</DependentUpon>
@@ -161,6 +158,7 @@
   <ItemGroup>
     <Content Include="Assets\add_list_32px.png" />
     <Content Include="Assets\add_user_male_32px.png" />
+    <Content Include="Assets\Background.jpg" />
     <Content Include="Assets\download_32px.png" />
     <Content Include="Assets\generic-profile.jpg" />
     <Content Include="Assets\haarcascade_frontalface_alt.xml" />

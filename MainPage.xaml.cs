@@ -27,7 +27,8 @@ namespace UWPattendance
     public sealed partial class MainPage : Page
     {
       string _dbPath = Database_Connection._dbpath;
-      List<Person> Attendances;
+    List<Person> People;
+    List<Attendance> Attendances;
     public MainPage()
         {
 
@@ -67,7 +68,7 @@ namespace UWPattendance
                     case "People":
                       try
                       {
-                        Attendances = db.Table<Person>().OrderBy(m => m.Id).ToList();
+                        People = db.Table<Person>().OrderBy(m => m.Id).ToList();
                           Content_Frame.Navigate(typeof(People_Page));
                           break;
                       }
@@ -80,8 +81,18 @@ namespace UWPattendance
                     
 
                     case "Attendance":
+                      try
+                      {
+                        Attendances = db.Table<Attendance>().OrderBy(m => m.Id).ToList();
                         Content_Frame.Navigate(typeof(Attendance_Page));
                         break;
+                      }
+                      catch
+                      {
+              break;
+
+            }
+          
 
                     case "Add_Person":
                         Content_Frame.Navigate(typeof(Add_People_Page));

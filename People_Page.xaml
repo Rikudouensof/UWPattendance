@@ -10,8 +10,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <ListView x:Name="Attendance_ListView" Grid.Row="0" SelectionChanged="Attendance_ListView_SelectionChanged" SelectionMode="Single"
-                  >
+    <Image Source="Assets/Background.jpg" Stretch="Fill" Grid.Row="0"/>
+
+    <ListView x:Name="Attendance_ListView" Grid.Row="0" SelectionChanged="Attendance_ListView_SelectionChanged" SelectionMode="Single"
+                 Margin="00,30,00,00" >
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:Person">
                     <Grid Margin="00,10" >
@@ -27,13 +29,20 @@
                                     Margin="20,00,00,00"
                                     HorizontalAlignment="Stretch">
                             <TextBlock Text="{x:Bind LastName}" 
-                                       FontWeight="Bold"/>
+                                       FontWeight="Bold"
+                                       FontSize="30"
+                                       Foreground="Black"
+                                       FontFamily="Arial Rounded MT"/>
                             <TextBlock Text="{x:Bind FirstName}" 
                                        FontWeight="Bold"  Opacity="0.6"
+                                       FontSize="25"
+                                        FontFamily="Arial Rounded MT"
                                        />
 
                             <TextBlock Text="{x:Bind DateRegistered}" 
-                                       FontWeight="Bold"  Opacity="0.2"
+                                       FontWeight="Bold"  Opacity="0.5"
+                                       FontSize="25"
+                                        FontFamily="Arial Rounded MT"
                                        />
                         </StackPanel>
 

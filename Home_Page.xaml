@@ -8,12 +8,26 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel>
+    <Grid>
 
-        <StackPanel
+  
+
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+    <Image Source="Assets/Background.jpg" Stretch="Fill"  Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+    <StackPanel
                     Margin="30"
-                    Background="LightBlue"
+                    Background="Green"
                    Orientation="Horizontal"
+                   
                     >
 
             <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE716;"
@@ -21,6 +35,7 @@
                        HorizontalAlignment="Center"
                        HorizontalTextAlignment="Center"
                        FontSize="70"
+                       Foreground="Beige"
                        Margin="20,00,00,00"
                        />
             <TextBlock Text="20"
@@ -29,11 +44,39 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        HorizontalTextAlignment="Center"
+                        Foreground="Beige"
                        Margin="20,00,00,00"/>
-        </StackPanel>
-        
-
-
-
     </StackPanel>
+
+
+    <StackPanel
+                    Margin="30"
+                    Background="Green"
+                   Orientation="Horizontal"
+      
+                   Grid.Column="1"
+                    >
+
+      <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEC92;"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       HorizontalTextAlignment="Center"
+                  Foreground="Beige"
+                       FontSize="70"
+                       Margin="20,00,00,00"
+                       />
+      <TextBlock Text="20"
+                       x:Name="DateTextblock"
+                       FontSize="20"
+                       HorizontalAlignment="Center"
+                  Foreground="Beige"
+                       VerticalAlignment="Center"
+                       HorizontalTextAlignment="Center"
+                       Margin="20,00,00,00"/>
+    </StackPanel>
+
+
+
+
+  </Grid>
 </Page>
