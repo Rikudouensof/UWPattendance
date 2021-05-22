@@ -24,6 +24,8 @@ using Windows.Graphics.Imaging;
 using SQLite;
 using UWPattendance.Models;
 using Windows.UI.Popups;
+using Windows.Media.SpeechSynthesis;
+using Microsoft.Extensions.Configuration;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -36,9 +38,10 @@ namespace UWPattendance
     public sealed partial class Add_People_Page : Page
     {
 
-
-        string _dbPath = Database_Connection._dbpath;
-        string imagepath = "";
+    private string allitem;
+    string _dbPath = Database_Connection._dbpath;
+        string imagepath = "",imageName = "";
+    SpeechSynthesizer speech;
 
 
         #region Variables
@@ -89,8 +92,9 @@ namespace UWPattendance
 
             string name = LastName_Entry.Text + " "+ FirstName_Entry.Text + ".jpg";
 
-            await photo.CopyAsync(destinationFolder, name, NameCollisionOption.FailIfExists);
+            await photo.CopyAsync(destinationFolder, name, NameCollisionOption.GenerateUniqueName);
             string a = photo.Path;
+      imageName = photo.Name;
             imagepath = a.Replace("\\", "/");
 
             //  await photo.DeleteAsync();
@@ -99,7 +103,25 @@ namespace UWPattendance
             Add_Person_Button.Visibility = Visibility.Visible;
         }
 
-        private async void Add_Person_Button_Click(object sender, RoutedEventArgs e)
+
+   
+
+
+
+    private async void readText(string mytext)
+    {
+      MediaElement mediaplayer = new MediaElement();
+      using (var speech = new SpeechSynthesizer())
+      {
+        speech.Voice = SpeechSynthesizer.AllVoices.First(gender => gender.Gender == VoiceGender.Female);
+        string ssml = @"<speak version='1.0' " + "xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='en-UK'>" + allitem + "</speak>";
+        SpeechSynthesisStream stream = await speech.SynthesizeSsmlToStreamAsync(ssml);
+        mediaplayer.SetSource(stream, stream.ContentType);
+        mediaplayer.Play();
+      }
+    }
+
+    private async void Add_Person_Button_Click(object sender, RoutedEventArgs e)
         {
             string popupmessage = "";
             var db = new SQLiteConnection(_dbPath);
@@ -114,11 +136,12 @@ namespace UWPattendance
                 LastName = LastName_Entry.Text,
                 FirstName = FirstName_Entry.Text,
                 ImagePath = imagepath,
-                DateRegistered = DateTime.UtcNow
+                DateRegistered = DateTime.UtcNow,
+                ImageName = imageName
 
             };
-            db.Insert(person);
-            popupmessage = person.LastName + " " + person.FirstName + " is Saved";
+            
+            popupmessage = person.LastName + " " + person.FirstName + " will be saved";
 
 
             //PopUp
@@ -136,17 +159,30 @@ namespace UWPattendance
             var result = await showDialog.ShowAsync();
             if ((int)result.Id == 0)
             {
-                LastName_Entry.Text = " ";
+        db.Insert(person);
+        allitem = "The user " + LastName_Entry.Text + " " + FirstName_Entry.Text + ", has been added to the system. You can now sign "+FirstName_Entry.Text +" in for today, or you can go to the people page, to see all users.";
+        readText(allitem);
+        var fileinfo = new FileInfo(imagepath);
+        BlobConstructors.UploadFile(fileinfo,BlobConstructors.Blobconnectionstring,BlobConstructors.containername);
+
+        LastName_Entry.Text = " ";
                 FirstName_Entry.Text = " ";
                 User_Image.Visibility = Visibility.Collapsed;
                 Capture_Person_Button.Visibility = Visibility.Collapsed;
                 Add_Person_Button.Visibility = Visibility.Collapsed;
-                this.Frame.Navigate(typeof(People_Page));
+
+       
+
+
+
+                
+
             }
             else
             {
-                //skip your task  
-            }
+        allitem = "The user " + LastName_Entry.Text + " " + FirstName_Entry.Text + ", has not been added to the system.";
+        readText(allitem);
+      }
 
           
         }

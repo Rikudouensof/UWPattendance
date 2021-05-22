@@ -25,6 +25,8 @@ namespace UWPattendance.Models
 
         public DateTime DateRegistered { get; set; }
 
+    public string ImageName { get; set; }
 
-    }
+
+  }
 }
