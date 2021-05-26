@@ -134,6 +134,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnswerReturns.cs" />
     <Compile Include="Models\Attendance.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="People_Page.xaml.cs">
@@ -148,6 +149,7 @@
     </Compile>
     <Compile Include="Tasks\BlobConstructors.cs" />
     <Compile Include="Tasks\CascadeClassifiers.cs" />
+    <Compile Include="Tasks\CompareFaceConstructor.cs" />
     <Compile Include="Tasks\Database_Connection.cs" />
     <Compile Include="Tasks\GetFaceRecognitionKeys.cs" />
     <Compile Include="Tasks\Text_to_Speech.cs" />

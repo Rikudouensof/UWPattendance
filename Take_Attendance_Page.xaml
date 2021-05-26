@@ -43,6 +43,7 @@
                 x:Name="Detect_Person_Button"
                 VerticalAlignment="Bottom"
                Visibility="Collapsed"  Background="Green"
+               Click="Detect_Person_Button_Click"
                Foreground="Beige"/>
 
     </StackPanel>

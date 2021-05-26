@@ -27,9 +27,10 @@ namespace UWPattendance.Models
 
 
         public string NewPicturePath { get; set; }
+    public string ImageName { get; set; }
 
 
-        public DateTime Date_Signed_In_Date_and_Time { get; set; }
+    public DateTime Date_Signed_In_Date_and_Time { get; set; }
 
     }
 

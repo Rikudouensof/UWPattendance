@@ -13,6 +13,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Imaging;
 using Windows.Media.Capture;
+using Windows.Media.SpeechSynthesis;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml;
@@ -33,28 +34,95 @@ namespace UWPattendance
   /// </summary>
   public sealed partial class Take_Attendance_Page : Page
   {
-    string imagepathHolder = "";
+    public static string imagepathHolder = "", imageName = " ";
     public List<string> detectInfo;
     public static string personGroupId = Guid.NewGuid().ToString();
+    public static double maxNumber;
+    public static string ENDPOINT = GetFaceRecognitionKeys.Endpoint;
+    public static string RECOGNITION_MODEL4 = RecognitionModel.Recognition04;
+    public static string SUBSCRIPTION_KEY = GetFaceRecognitionKeys.Key;
     // From your Face subscription in the Azure portal, get your subscription key and endpoint.
-    string SUBSCRIPTION_KEY = GetFaceRecognitionKeys.Key;
 
-    string ENDPOINT = GetFaceRecognitionKeys.Endpoint;
-    const string RECOGNITION_MODEL4 = RecognitionModel.Recognition04;
+   
+     
+
+
     // Used for all examples.
     // URL for the images.
     const string IMAGE_BASE_URL = "https://csdx.blob.core.windows.net/resources/Face/Images/";
-
+    List<string> imageNames;
+    private Dictionary<string, string[]> here;
 
     public Take_Attendance_Page()
     {
       this.InitializeComponent();
       string _dbPath = Database_Connection._dbpath;
-      List<Models.Person> People;
+
+
+
+      var db = new SQLiteConnection(_dbPath);
+      db.CreateTable<Models.Person>();
+      var filterImageName = db.Table<Models.Person>().Select(m => m.ImageName).ToList();
+      imageNames = filterImageName;
 
 
 
 
+
+    }
+
+
+    private async void readText(string mytext)
+    {
+      MediaElement mediaplayer = new MediaElement();
+      using (var speech = new Windows.Media.SpeechSynthesis.SpeechSynthesizer())
+      {
+        speech.Voice = SpeechSynthesizer.AllVoices.First(gender => gender.Gender == VoiceGender.Female);
+        string ssml = @"<speak version='1.0' " + "xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='en-UK'>" + mytext + "</speak>";
+        SpeechSynthesisStream stream = await speech.SynthesizeSsmlToStreamAsync(ssml);
+        mediaplayer.SetSource(stream, stream.ContentType);
+        mediaplayer.Play();
+      }
+    }
+
+    private async void Detect_Person_Button_Click(object sender, RoutedEventArgs e)
+    {
+
+      var fileinfo = new FileInfo(imagepathHolder);
+      BlobConstructors.UploadFile(fileinfo, BlobConstructors.Blobconnectionstring, BlobConstructors.containername2);
+
+      
+      
+      
+      
+      
+      IFaceClient client = CompareFaceConstructor.Authenticate(ENDPOINT, SUBSCRIPTION_KEY);
+
+      // Find Similar - find a similar face from a list of faces.
+      var result = await  CompareFaceConstructor.FindSimilar(client, BlobConstructors.blobBaseUrl, imageName, BlobConstructors.blobBaseUrl2, RecognitionModel.Recognition04, imageNames);
+      string _dbPath = Database_Connection._dbpath;
+
+
+
+      var db = new SQLiteConnection(_dbPath);
+      var dz = new SQLiteConnection(_dbPath);
+      db.CreateTable<Models.Person>();
+      db.CreateTable<Models.Attendance>();
+      var p = db.Table<Models.Person>().Where(m => m.ImageName == result.Result).FirstOrDefault();
+
+      Books_Label.Text = result.Output.ToString();
+      readText(result.ToString());
+
+
+      //Attendance attendance = new Attendance()
+      //{
+      //  FirstName = p.FirstName,
+      //  Date_Signed_In_Date_and_Time = DateTime.UtcNow,
+      //  LastName = p.LastName,
+      //  User_ID = p.Id
+      //};
+
+      //  db.Insert(attendance);
     }
 
 
@@ -97,11 +165,17 @@ namespace UWPattendance
       await photo.CopyAsync(destinationFolder, imagename, NameCollisionOption.FailIfExists);
       var a = photo.Path;
       imagepathHolder = a.Replace("\\", "/");
+      imageName = photo.Name;
+
       Detect_Person_Button.Visibility = Visibility.Visible;
+
 
       //  await photo.DeleteAsync();
 
     }
+
+
+
   }
 }
           

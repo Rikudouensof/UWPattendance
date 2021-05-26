@@ -14,8 +14,10 @@ namespace UWPattendance.Tasks
 
     public static string Blobconnectionstring = "DefaultEndpointsProtocol=https;AccountName=eeeproject;AccountKey=8v6040AWFPSOVrpRWlK0re0UgZRLslrTT+OZUSCJOOB8PLnMIKhRnJHvYoME/6UXupcONrVLza/ksH8crX7R2A==;EndpointSuffix=core.windows.net";
     public static string containername = "facerecblob";
+    public static string containername2 = "trialfaceblob";
 
     public static string blobBaseUrl = "https://eeeproject.blob.core.windows.net/facerecblob/";
+    public static string blobBaseUrl2 = "https://eeeproject.blob.core.windows.net/trialfaceblob/";
 
 
     public static IConfigurationRoot GetConfiguration() => new ConfigurationBuilder()
