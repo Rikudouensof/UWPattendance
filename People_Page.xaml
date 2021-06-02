@@ -15,7 +15,7 @@
     <ListView x:Name="Attendance_ListView" Grid.Row="0" SelectionChanged="Attendance_ListView_SelectionChanged" SelectionMode="Single"
                  Margin="00,30,00,00" >
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="data:Person">
+                <DataTemplate >
                     <Grid Margin="00,10" >
 
                         <Grid.ColumnDefinitions>

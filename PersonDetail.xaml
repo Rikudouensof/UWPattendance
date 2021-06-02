@@ -19,7 +19,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-    <Image Source="Assets/Background.jpg" Stretch="Fill" Grid.RowSpan="3" Grid.Row="0"/>
+   
 
 
     <StackPanel VerticalAlignment="Top"
@@ -28,7 +28,7 @@
                     
                     >
       <Button Content="Delete" HorizontalAlignment="Stretch" x:Name="DeleteButton"
-              Click="DeleteButton_Click"/>
+              Click="DeleteButton_Click" Background="LightGreen" Foreground="Beige"/>
 
 
       <StackPanel Orientation="Horizontal" Margin="00,10">
@@ -63,34 +63,40 @@
         </StackPanel>
 
 
-    <Image Grid.Row="2" MaxHeight="300" 
+    <Image Grid.Row="1" MaxHeight="300" 
                x:Name="UserImage">
      
     </Image>
 
-    <ListView x:Name="Attendance_ListView" Grid.Row="1">
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="data:Attendance">
-                    <Grid HorizontalAlignment="Stretch" >
+    <StackPanel  Grid.Row="2" Margin="00,30,00,00" >
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="4*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Vertical" Grid.Column="0">
-                            <TextBlock Text="{x:Bind LastName}" 
+      <TextBlock Text="Attendance" Margin="30,00,00,00"  FontWeight="ExtraBold" HorizontalAlignment="Center" />
+
+      <ListView x:Name="Attendance_ListView" Background="Black" Margin="00,30,00,00">
+        <ListView.ItemTemplate>
+          <DataTemplate x:DataType="data:Attendance">
+            <Grid HorizontalAlignment="Stretch" >
+
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+              <StackPanel Orientation="Vertical" Grid.Column="0">
+                <TextBlock Text="{x:Bind LastName}" 
                                        FontWeight="Bold"/>
-                            <TextBlock Text="{x:Bind FirstName}" 
+                <TextBlock Text="{x:Bind FirstName}" 
                                        FontWeight="Bold"  Opacity="0.6"/>
-                        </StackPanel>
+              </StackPanel>
 
-                        <TextBlock Text="{x:Bind Date_Signed_In_Date_and_Time}"  
-                                   HorizontalAlignment="Center" Grid.Column="1" />
+              <TextBlock Text="{x:Bind Date_Signed_In_Date_and_Time}"  
+                                   HorizontalAlignment="Center" Grid.Column="1" Margin="30,00,00,00" />
 
 
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </Grid>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </StackPanel>
+
     </Grid>
 </Page>

@@ -20,9 +20,11 @@
                     
                     />
 
-        <ListView x:Name="Attendance_ListView" Grid.Row="1">
+        <ListView x:Name="Attendance_ListView" Grid.Row="1" 
+                  SelectionChanged="Attendance_ListView_SelectionChanged"
+                  Margin="00,30,00,00" HorizontalAlignment="Stretch">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="data:Attendance">
+                <DataTemplate >
                     <Grid HorizontalAlignment="Stretch" >
 
                         <Grid.ColumnDefinitions>
@@ -40,7 +42,8 @@
 
                         <TextBlock Text="{x:Bind Date_Signed_In_Date_and_Time}"  
                                    HorizontalAlignment="Center" Grid.Column="1" 
-                                    FontSize="20"/>
+                                    FontSize="20"
+                                   Margin="30,00,00,00"/>
 
                        
                     </Grid>

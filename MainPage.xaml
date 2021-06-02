@@ -44,12 +44,7 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
 
-                <NavigationViewItem Content="Download Attendance" Tag="Download">
-                    <NavigationViewItem.Icon>
-
-                        <BitmapIcon UriSource="Assets/download_32px.png"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
+               
             </NavigationView.MenuItems>
 
             <ScrollViewer>

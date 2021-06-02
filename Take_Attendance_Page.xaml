@@ -34,6 +34,7 @@
                 Click="Capture_Person_Button_Click"
                Background="Green"
                Foreground="Beige"
+               
                />
 
 
@@ -48,15 +49,18 @@
 
     </StackPanel>
 
-       
 
 
-        
 
-        <TextBox x:Name="Books_Label" IsEnabled="False" Grid.Row="2" 
+    <StackPanel Background="White" Grid.Row="2"
+                Margin="30" Padding="10">
+      <TextBox x:Name="Books_Label" IsEnabled="False"  
                  Text="See here for updates" ScrollViewer.VerticalScrollBarVisibility="Visible"
                  Margin="20,30" Background="White"
                  Foreground="DarkGreen"/>
+    </StackPanel>
+
+       
 
 
     </Grid>

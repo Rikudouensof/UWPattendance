@@ -10,7 +10,7 @@ namespace UWPattendance.Tasks
     public class Database_Connection
     {
 
-        public static string _dbpath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Aeattendance.db3");
+        public static string _dbpath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), "Beattendance.db3");
 
 
         

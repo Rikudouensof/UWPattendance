@@ -9,6 +9,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using UWPattendance.Models;
 using UWPattendance.Tasks;
+using UWPattendance.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Imaging;
@@ -51,6 +52,7 @@ namespace UWPattendance
     // URL for the images.
     const string IMAGE_BASE_URL = "https://csdx.blob.core.windows.net/resources/Face/Images/";
     List<string> imageNames;
+    public List<InPutDictlist> personDictionary = new List<InPutDictlist>();
     private Dictionary<string, string[]> here;
 
     public Take_Attendance_Page()
@@ -62,11 +64,23 @@ namespace UWPattendance
 
       var db = new SQLiteConnection(_dbPath);
       db.CreateTable<Models.Person>();
+      var allpeople = db.Table<Models.Person>();
       var filterImageName = db.Table<Models.Person>().Select(m => m.ImageName).ToList();
       imageNames = filterImageName;
 
 
-
+      foreach (var item in allpeople)
+      {
+        string[] answer = new string[] { item.ImageName};
+        InPutDictlist inPutDictlist = new InPutDictlist()
+        {
+          Name = item.Id.ToString(),
+          ImageName = answer
+          
+        
+        };
+       personDictionary.Add(inPutDictlist);
+      }
 
 
     }
@@ -99,30 +113,86 @@ namespace UWPattendance
       IFaceClient client = CompareFaceConstructor.Authenticate(ENDPOINT, SUBSCRIPTION_KEY);
 
       // Find Similar - find a similar face from a list of faces.
-      var result = await  CompareFaceConstructor.FindSimilar(client, BlobConstructors.blobBaseUrl, imageName, BlobConstructors.blobBaseUrl2, RecognitionModel.Recognition04, imageNames);
+     // var result = await  CompareFaceConstructor.FindSimilar(client, BlobConstructors.blobBaseUrl, imageName, BlobConstructors.blobBaseUrl2, RecognitionModel.Recognition04, imageNames);
       string _dbPath = Database_Connection._dbpath;
 
 
 
-      var db = new SQLiteConnection(_dbPath);
-      var dz = new SQLiteConnection(_dbPath);
-      db.CreateTable<Models.Person>();
-      db.CreateTable<Models.Attendance>();
-      var p = db.Table<Models.Person>().Where(m => m.ImageName == result.Result).FirstOrDefault();
-
-      Books_Label.Text = result.Output.ToString();
-      readText(result.ToString());
 
 
-      //Attendance attendance = new Attendance()
-      //{
-      //  FirstName = p.FirstName,
-      //  Date_Signed_In_Date_and_Time = DateTime.UtcNow,
-      //  LastName = p.LastName,
-      //  User_ID = p.Id
-      //};
 
-      //  db.Insert(attendance);
+
+
+      //Verify(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
+
+      //// Identify - recognize a face(s) in a person group (a person group is created in this example).
+      ///
+      GetRecognisedUserViewModel Identity = new GetRecognisedUserViewModel();
+      try
+      {
+      Identity = await CompareFaceConstructor.IdentifyInPersonGroup(client, personDictionary, BlobConstructors.blobBaseUrl, BlobConstructors.blobBaseUrl2, imageName, RECOGNITION_MODEL4);
+        string Message = "";
+        var db = new SQLiteConnection(_dbPath);
+        var dz = new SQLiteConnection(_dbPath);
+        db.CreateTable<Models.Person>();
+        db.CreateTable<Models.Attendance>();
+        //var p = db.Table<Models.Person>().Where(m => m.ImageName == result.Result).FirstOrDefault();
+        int way = int.Parse(Identity.highestperson.Name);
+        var p = db.Table<Models.Person>().Where(m => m.Id == way).FirstOrDefault();
+        var Count = db.Table<Models.Attendance>().Count();
+        //Books_Label.Text = result.Output.ToString();
+        //readText(result.ToString());
+        if (Identity.ConfidenceLevel > 0.7)
+        {
+
+          Message = "Welcome back " + p.LastName + " " + p.FirstName + " , You have been logged in. Have a pleasant day!";
+          Books_Label.Text = Identity.Answers;
+          Attendance attendance = new Attendance()
+          {
+            Id = Count + 1,
+            FirstName = p.FirstName,
+            Date_Signed_In_Date_and_Time = DateTime.UtcNow,
+            LastName = p.LastName,
+            User_ID = p.Id
+          };
+          db.Insert(attendance);
+
+          readText(Message);
+        }
+        else
+        {
+          var confipercentage = Identity.ConfidenceLevel * 100;
+          Message = "I am not comfortable this is who i think this is. i am only " + confipercentage + " percent sure, that this is" + p.FirstName + " " + p.LastName + ".";
+          readText(Message);
+        }
+
+
+
+      }
+      catch 
+      {
+
+        readText("Face not detected from Image or Server cannot be reached");
+      }
+
+
+      //// LargePersonGroup - create, then get data.
+      //LargePersonGroup(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
+      //// Group faces - automatically group similar faces.
+      //Group(client, IMAGE_BASE_URL, RECOGNITION_MODEL4).Wait();
+
+
+
+
+
+
+
+
+
+
+
+      
+      
     }
 
 

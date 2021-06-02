@@ -34,8 +34,7 @@ namespace UWPattendance.Tasks
     
 
 
-    public static void UploadFile(
-      FileInfo file, string connectionString, string container)
+    public static void UploadFile(FileInfo file, string connectionString, string container)
     {
       var containerClient = new BlobContainerClient(connectionString, container);
 

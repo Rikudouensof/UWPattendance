@@ -34,16 +34,24 @@ namespace UWPattendance
               var db = new SQLiteConnection(_dbPath);
 
        Attendances = db.Table<Attendance>().OrderBy(m => m.Id).ToList();
+        
       //Attendances = AttendanceList.GetAttendance();
 
-            Attendance_ListView.ItemsSource = Attendances;
+            Attendance_ListView.ItemsSource = Attendances.Where(m => m.Date_Signed_In_Date_and_Time == DateTime.Today);
         }
 
         private void Attemdamce_Date_Picker_SelectedDateChanged(DatePicker sender, DatePickerSelectedValueChangedEventArgs args)
         {
-            Attendances = AttendanceList.GetAttendance();
-            var attendance = Attendances.Where(m => m.Date_Signed_In_Date_and_Time.Date.ToString("dd/MM/yyyy") == sender.SelectedDate.Value.ToString("dd/MM/yyyy"));
+      var attendance = Attendances.Where(m => m.Date_Signed_In_Date_and_Time.Date.ToString("dd/MM/yyyy") == sender.SelectedDate.Value.ToString("dd/MM/yyyy"));
             Attendance_ListView.ItemsSource = attendance;
         }
+
+    private void Attendance_ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+
+      var item = Attendance_ListView.SelectedItem as Attendance;
+      this.Frame.Navigate(typeof(PersonDetail), item.User_ID);
     }
+  }
 }

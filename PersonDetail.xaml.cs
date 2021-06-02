@@ -42,15 +42,17 @@ namespace UWPattendance
              userId = user_Id;
             var db = new SQLiteConnection(_dbPath);
             var selected_person = db.Table<Person>().Where(m => m.Id == user_Id).FirstOrDefault();
-            var user_attendance = db.Table<Attendance>().Where(m => m.User_ID == user_Id).OrderByDescending(m => m.Date_Signed_In_Date_and_Time);
+            var user_attendance = db.Table<Attendance>().Where(m => m.User_ID == user_Id).OrderByDescending(m => m.Date_Signed_In_Date_and_Time).Select(m => m.Date_Signed_In_Date_and_Time).FirstOrDefault();
       BitmapImage imagesource = new BitmapImage(new Uri(selected_person.ImagePath));
       UserImage.Source = imagesource;
 
+      var attendance_of_person = db.Table<Attendance>().Where(m => m.User_ID == user_Id).OrderByDescending(m => m.Date_Signed_In_Date_and_Time);
+      Last_Login_TextBlock.Text = user_attendance.ToString("ddd dd MMM yyyy  HH:mm");
 
             Last_Name_TextBlock.Text = selected_person.LastName;
             FirstName_Name_TextBlock.Text = selected_person.FirstName;
             Registration_Date_TextBlock.Text = selected_person.DateRegistered.ToString("ddd dd MMM yyyy  HH:mm");
-      
+      Attendance_ListView.ItemsSource = attendance_of_person;
 
             // parameters.Name
             // parameters.Text
