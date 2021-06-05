@@ -5,52 +5,51 @@
     xmlns:local="using:UWPattendance"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:data="using:UWPattendance.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
 
-        <DatePicker Grid.Row="0" x:Name="Attemdamce_Date_Picker"
+    <DatePicker Grid.Row="0" x:Name="Attemdamce_Date_Picker"
                     SelectedDateChanged="Attemdamce_Date_Picker_SelectedDateChanged"
                     
                     />
 
-        <ListView x:Name="Attendance_ListView" Grid.Row="1" 
+    <ListView x:Name="Attendance_ListView" Grid.Row="1" 
                   SelectionChanged="Attendance_ListView_SelectionChanged"
                   Margin="00,30,00,00" HorizontalAlignment="Stretch">
-            <ListView.ItemTemplate>
-                <DataTemplate >
-                    <Grid HorizontalAlignment="Stretch" >
+      <ListView.ItemTemplate>
+        <DataTemplate >
+          <Grid HorizontalAlignment="Stretch" >
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="4*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Vertical" Grid.Column="0">
-                            <TextBlock Text="{x:Bind LastName}" 
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="4*"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Grid.Column="0">
+              <TextBlock Text="{x:Bind LastName}" 
                                        FontWeight="Bold"
                                        FontSize="20"/>
-                            <TextBlock Text="{x:Bind FirstName}" 
+              <TextBlock Text="{x:Bind FirstName}" 
                                        FontWeight="Bold"  Opacity="0.6"
                                         FontSize="20"/>
-                        </StackPanel>
+            </StackPanel>
 
-                        <TextBlock Text="{x:Bind Date_Signed_In_Date_and_Time}"  
+            <TextBlock Text="{x:Bind Date_Signed_In_Date_and_Time}"  
                                    HorizontalAlignment="Center" Grid.Column="1" 
                                     FontSize="20"
                                    Margin="30,00,00,00"/>
 
-                       
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>        
-        </ListView>
-        
 
-    </Grid>
+          </Grid>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+
+
+  </Grid>
 </Page>
